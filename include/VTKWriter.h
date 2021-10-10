@@ -1,0 +1,6 @@
+// Jelle Spijker 2021
+
+#ifndef VTKWRITER_VTKWRITER_H
+#define VTKWRITER_VTKWRITER_H
+
+#endif //VTKWRITER_VTKWRITER_H
