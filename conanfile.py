@@ -1,10 +1,9 @@
-from conans import ConanFile, tools
+from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
-from conan.tools.layout import LayoutPackager, cmake_layout
+from conan.tools.layout import cmake_layout
 
 class VTKWriterConan(ConanFile):
     name = "VTKWriter"
-    version = "0.1.0"
     description = "A minimal VTK file writer"
     topics = ("conan", "vtk")
     license = "MIT"
@@ -58,6 +57,3 @@ class VTKWriterConan(ConanFile):
         cmake.configure()
         cmake.build()
         cmake.install()
-
-    def package(self):
-        LayoutPackager(self).package()
