@@ -16,18 +16,18 @@ find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(rapidxml REQUIRED)
 
-option(ENABLE_TESTING "Build with unit test" ON)
-if(ENABLE_TESTING)
+option(ENABLE_TESTS "Build with unit test" ON)
+if (ENABLE_TESTS)
     enable_testing()
     message("Building Tests")
     add_subdirectory(tests)
-endif()
+endif ()
 
 option(ENABLE_BENCHMARKS "Build with benchmarks" ON)
 if (ENABLE_BENCHMARKS)
     message("Building Benchmarks")
     add_subdirectory(benchmarks)
-endif()
+endif ()
 
 set(SCR
         scr/VTKWriter.cpp)
