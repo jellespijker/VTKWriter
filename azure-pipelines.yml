@@ -7,10 +7,10 @@ trigger:
       - master
       - releases/*
       - refs/tags/v*
-      
+
 pr:
-- main
-- releases/*
+  - main
+  - releases/*
 
 jobs:
   - job: Windows
@@ -18,13 +18,13 @@ jobs:
       vmImage: 'windows-2022'
     steps:
       - script: |
-        pip install conan
-        conan config install https://github.com/ultimaker/conan-config.git
-        conan profile new default --detect
-        conan user -p ${env:CONAN_PASS} -r ultimaker ${env:CONAN_USER}
-      displayName: prepare Conan
-    - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
-      displayName: create package
+          pip install conan
+          conan config install https://github.com/ultimaker/conan-config.git
+          conan profile new default --detect
+          conan user -p ${env:CONAN_PASS} -r ultimaker ${env:CONAN_USER}
+        displayName: prepare Conan
+      - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
+        displayName: create package
       - script: conan upload "* -r ultimaker --all -c
         displayName: upload package
   - job: macOS
@@ -33,25 +33,25 @@ jobs:
     steps:
       - script: |
           pip3 install conan
-        conan config install https://github.com/ultimaker/conan-config.git
-        conan profile new default --detect
-        conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
-      displayName: prepare Conan
+          conan config install https://github.com/ultimaker/conan-config.git
+          conan profile new default --detect
+          conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
+        displayName: prepare Conan
       - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
         displayName: create package
-          - script: conan upload "*" -r ultimaker --all -c
-            displayName: upload package
+      - script: conan upload "*" -r ultimaker --all -c
+        displayName: upload package
   - job: Linux
     pool:
       vmImage: 'ubuntu-20.04'
     steps:
       - script: |
-        pip install conan
-        conan config install https://github.com/ultimaker/conan-config.git
-        conan profile new default --detect
-        conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
-      displayName: prepare Conan
-    - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
-      displayName: create package
-        - script: conan upload "*" -r ultimaker --all -c
-          displayName: upload package
+          pip install conan
+          conan config install https://github.com/ultimaker/conan-config.git
+          conan profile new default --detect
+          conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
+        displayName: prepare Conan
+      - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
+        displayName: create package
+      - script: conan upload "*" -r ultimaker --all -c
+        displayName: upload package
