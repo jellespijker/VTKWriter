@@ -40,6 +40,7 @@ class VTKWriterConan(ConanFile):
     def requirements(self):
         self.requires("fmt/8.1.1")
         self.requires("spdlog/1.10.0")
+        self.requires("rapidxml/1.13")
 
     def layout(self):
         cmake_layout(self)

@@ -14,6 +14,7 @@ set_project_warnings(project_warnings)
 
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
+find_package(rapidxml REQUIRED)
 
 option(ENABLE_TESTING "Build with unit test" ON)
 if(ENABLE_TESTING)
@@ -38,10 +39,11 @@ add_library(VTKWriter ${SCR} ${HDR})
 
 target_link_libraries(VTKWriter
         PRIVATE
-            project_options
-            project_warnings
-            spdlog
-            fmt
+        project_options
+        project_warnings
+        spdlog::spdlog
+        fmt::fmt
+        rapidxml::rapidxml
         )
 
 target_include_directories(VTKWriter
