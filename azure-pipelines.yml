@@ -1,0 +1,16 @@
+jobs:
+  - job: Windows
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - script: echo hello from Windows
+  - job: macOS
+    pool:
+      vmImage: 'macOS-latest'
+    steps:
+      - script: echo hello from macOS
+  - job: Linux
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - script: echo hello from Linux
