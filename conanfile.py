@@ -19,8 +19,8 @@ class VTKWriterConan(ConanFile):
         "fPIC": [True, False]
     }
     default_options = {
-        "tests": True,
-        "benchmarks": True,
+        "tests": False,
+        "benchmarks": False,
         "shared": True,
         "fPIC": False
     }
