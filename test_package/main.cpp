@@ -1,4 +1,8 @@
-//
-// Created by peer23peer on 10-10-21.
-//
+#include <VTKWriter/VTKWriter.h>
+#include <iostream>
 
+int main()
+{
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}

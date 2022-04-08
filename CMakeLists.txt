@@ -32,7 +32,7 @@ set(SCR
         scr/VTKWriter.cpp)
 
 set(HDR
-        include/VTKWriter.h)
+        include/VTKWriter/VTKWriter.h)
 
 add_library(VTKWriter ${SCR} ${HDR})
 
