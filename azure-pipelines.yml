@@ -21,7 +21,7 @@ jobs:
           pip install conan
           conan config install https://github.com/ultimaker/conan-config.git
           conan profile new default --detect
-          conan user -p ${env:CONAN_PASS} -r ultimaker ${env:CONAN_USER}
+          conan user -p $%CONAN_USER% -r ultimaker %CONAN_PASS%
         displayName: prepare Conan
       - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
         displayName: create package
