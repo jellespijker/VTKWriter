@@ -1,6 +1,10 @@
+#  Copyright (c) 2022 Jelle Spijker
+#  VTKWriter is released under the terms of the AGPLv3 or higher
+
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
 from conan.tools.layout import cmake_layout
+
 
 class VTKWriterConan(ConanFile):
     name = "vtkwriter"
@@ -19,8 +23,8 @@ class VTKWriterConan(ConanFile):
         "fPIC": [True, False]
     }
     default_options = {
-        "tests": False,
-        "benchmarks": False,
+        "tests": True,
+        "benchmarks": True,
         "shared": True,
         "fPIC": False
     }

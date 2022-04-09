@@ -1,5 +1,8 @@
+# Copyright (c) 2022 Jelle Spijker
+# VTKWriter is released under the terms of the AGPLv3 or higher
+
 # Set a default build type if none was specified
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
     set(CMAKE_BUILD_TYPE
             RelWithDebInfo

@@ -1,6 +1,5 @@
-# from here:
-#
-# https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md
+# Copyright (c) 2022 Jelle Spijker
+# VTKWriter is released under the terms of the AGPLv3 or higher
 
 function(set_project_warnings project_name)
     option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" TRUE)

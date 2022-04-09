@@ -1,3 +1,6 @@
+# Copyright (c) 2022 Jelle Spijker
+# VTKWriter is released under the terms of the AGPLv3 or higher
+
 cmake_minimum_required(VERSION 3.21)
 project(VTKWriterTestPackage CXX)
 

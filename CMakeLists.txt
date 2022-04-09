@@ -1,3 +1,6 @@
+# Copyright (c) 2022 Jelle Spijker
+# VTKWriter is released under the terms of the AGPLv3 or higher
+
 cmake_minimum_required(VERSION 3.21)
 project(VTKWriter CXX)
 
@@ -48,7 +51,7 @@ target_link_libraries(VTKWriter
 
 target_include_directories(VTKWriter
         PUBLIC
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-            $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
         PRIVATE
-            src)
+        src)
