@@ -1,5 +1,11 @@
 name: CD
 
+variables:
+- name: PACKAGE_USER
+  value: jellespijker
+- name: PACKAGE_CHANNEL
+  value: testing
+
 trigger:
   branches:
     include:
@@ -17,41 +23,50 @@ jobs:
     pool:
       vmImage: 'windows-2022'
     steps:
-      - script: |
+      - powershell: |
           pip install conan
           conan config install https://github.com/ultimaker/conan-config.git
           conan profile new default --detect
-          conan user -p $%CONAN_PASS% -r ultimaker %CONAN_USER%
-        displayName: prepare Conan
-      - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
-        displayName: create package
-      - script: conan upload "* -r ultimaker --all -c
-        displayName: upload package
+          conan user -p $env:MAPPED_CONAN_PASS -r ultimaker $env:MAPPED_CONAN_USER
+        displayName: Prepare Conan environment
+        env:
+          MAPPED_CONAN_USER: $(CONAN_USER)
+          MAPPED_CONAN_PASS: $(CONAN_PASS)
+      - powershell: conan create . $(PACKAGE_USER)/$(PACKAGE_CHANNEL) -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
+        displayName: Create Conan package
+      - powershell: conan upload "*" -r ultimaker --all -c
+        displayName: Upload Conan package(s)
   - job: macOS
     pool:
       vmImage: 'macOS-10.15'
     steps:
-      - script: |
+      - bash: |
           pip3 install conan
           conan config install https://github.com/ultimaker/conan-config.git
           conan profile new default --detect
-          conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
-        displayName: prepare Conan
-      - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
-        displayName: create package
-      - script: conan upload "*" -r ultimaker --all -c
-        displayName: upload package
+          conan user -p $MAPPED_CONAN_PASS -r ultimaker $MAPPED_CONAN_USER
+        displayName: Prepare Conan environment
+        env:
+          MAPPED_CONAN_USER: $(CONAN_USER)
+          MAPPED_CONAN_PASS: $(CONAN_PASS)
+      - bash: conan create . $(PACKAGE_USER)/$(PACKAGE_CHANNEL) -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
+        displayName: Create Conan package
+      - bash: conan upload "*" -r ultimaker --all -c
+        displayName: Upload Conan package(s)
   - job: Linux
     pool:
       vmImage: 'ubuntu-20.04'
     steps:
-      - script: |
+      - bash: |
           pip install conan
           conan config install https://github.com/ultimaker/conan-config.git
           conan profile new default --detect
-          conan user -p $(CONAN_PASS) -r ultimaker $(CONAN_USER)
-        displayName: prepare Conan
-      - script: conan create . ultimaker/testing -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
-        displayName: create package
-      - script: conan upload "*" -r ultimaker --all -c
-        displayName: upload package
+          conan user -p $MAPPED_CONAN_PASS -r ultimaker $MAPPED_CONAN_USER
+        displayName: Prepare Conan environment
+        env:
+          MAPPED_CONAN_USER: $(CONAN_USER)
+          MAPPED_CONAN_PASS: $(CONAN_PASS)
+      - bash: conan create . $(PACKAGE_USER)/$(PACKAGE_CHANNEL) -pr:b cura_build.jinja -pr:h cura_release.jinja --build=missing
+        displayName: Create Conan package
+      - bash: conan upload "*" -r ultimaker --all -c
+        displayName: Upload Conan package(s)
